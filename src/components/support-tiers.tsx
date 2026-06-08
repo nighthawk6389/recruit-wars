@@ -45,9 +45,7 @@ export function SupportTiers({
             <h3 className="mt-4 font-display text-lg font-700">{tier.name}</h3>
             <div className="mt-1 flex items-baseline gap-1">
               <span className="font-display text-3xl font-700">{formatCurrency(tier.price)}</span>
-              {tier.id === "captain" || tier.id === "vip" ? null : (
-                <span className="text-xs text-slate-500">one-time</span>
-              )}
+              <span className="text-xs text-slate-500">{tier.recurring ? "/mo" : "one-time"}</span>
             </div>
             <p className="mt-2 text-sm text-slate-400">{tier.blurb}</p>
 

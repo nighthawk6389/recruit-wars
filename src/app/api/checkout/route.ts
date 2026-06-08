@@ -63,26 +63,17 @@ export async function POST(req: Request) {
   }
 
   const session = await stripe.checkout.sessions.create({
-    mode: tier.id === "vip" ? "subscription" : "payment",
+    mode: tier.recurring ? "subscription" : "payment",
     line_items: [
-      tier.id === "vip"
-        ? {
-            price_data: {
-              currency: "usd",
-              product_data: { name: `${tier.name} — ${body.athleteSlug}` },
-              recurring: { interval: "month" },
-              unit_amount: tier.price * 100,
-            },
-            quantity: 1,
-          }
-        : {
-            price_data: {
-              currency: "usd",
-              product_data: { name: `${tier.name} — ${body.athleteSlug}` },
-              unit_amount: tier.price * 100,
-            },
-            quantity: 1,
-          },
+      {
+        price_data: {
+          currency: "usd",
+          product_data: { name: `${tier.name} — ${body.athleteSlug}` },
+          unit_amount: tier.price * 100,
+          ...(tier.recurring ? { recurring: { interval: "month" as const } } : {}),
+        },
+        quantity: 1,
+      },
     ],
     customer_email: body.email,
     allow_promotion_codes: true,

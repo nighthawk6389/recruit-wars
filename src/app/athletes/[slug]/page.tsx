@@ -8,7 +8,9 @@ import {
 import {
   getAthleteBySlug, getAthletes, getSchools, getSchool,
   computeStandings, computeStats, getActivity, getSupporters,
+  computeRecentRaised, recentSupporters,
 } from "@/lib/data";
+import { SUPPORT_TIERS } from "@/../config/tiers";
 import { Stars } from "@/components/ui/stars";
 import { SchoolBadge } from "@/components/ui/school-badge";
 import { StatCard } from "@/components/ui/stat-card";
@@ -17,6 +19,8 @@ import { SchoolShareChart } from "@/components/school-share-chart";
 import { ActivityFeed } from "@/components/activity-feed";
 import { PurchasePanel } from "@/components/purchase-panel";
 import { ShareCard } from "@/components/share-card";
+import { RecentSupporters } from "@/components/recent-supporters";
+import { StickySupportCTA } from "@/components/sticky-support-cta";
 import { formatCurrency } from "@/lib/utils";
 import { siteConfig } from "@/../config/site";
 
@@ -42,6 +46,9 @@ export default async function AthleteProfile({ params }: { params: { slug: strin
   const standings = computeStandings(athlete.id);
   const stats = computeStats(athlete.id);
   const activity = getActivity(athlete.id, 14);
+  const weeklyRaised = computeRecentRaised(athlete.id, 7);
+  const recent = recentSupporters(athlete.id, 8);
+  const fromPrice = Math.min(...SUPPORT_TIERS.map((t) => t.price));
   const captains = supporters
     .filter((s) => s.tier === "captain" && s.status === "approved")
     .slice(0, 8);
@@ -84,7 +91,7 @@ export default async function AthleteProfile({ params }: { params: { slug: strin
 
       {/* STATS */}
       <div className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <StatCard label="Total raised" value={formatCurrency(stats.totalRevenue)} icon={DollarSign} accent="gold" />
+        <StatCard label="Total raised" value={formatCurrency(stats.totalRevenue)} icon={DollarSign} accent="gold" sub={weeklyRaised > 0 ? `+${formatCurrency(weeklyRaised)} this week` : undefined} />
         <StatCard label="Supporters" value={stats.totalSupporters.toLocaleString()} icon={Users} accent="electric" />
         <StatCard label="Messages" value={stats.totalMessages.toLocaleString()} icon={MessageSquare} accent="brand" />
         <StatCard label="Videos" value={stats.totalVideos.toLocaleString()} icon={Video} accent="green" />
@@ -128,6 +135,8 @@ export default async function AthleteProfile({ params }: { params: { slug: strin
         {/* RIGHT — sidebar */}
         <div className="space-y-6">
           <ShareCard athlete={athlete} standings={standings} totalSupporters={stats.totalSupporters} />
+
+          <RecentSupporters supporters={recent} />
 
           {/* NIL + interest tracker */}
           <div className="card p-6">
@@ -206,6 +215,10 @@ export default async function AthleteProfile({ params }: { params: { slug: strin
           <ActivityFeed initial={activity} />
         </div>
       </div>
+
+      {/* spacer so the mobile sticky CTA never covers content */}
+      <div className="h-20 lg:hidden" />
+      <StickySupportCTA athleteFirstName={athlete.name.split(" ")[0]} fromPrice={fromPrice} />
     </div>
   );
 }

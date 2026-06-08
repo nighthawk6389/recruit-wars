@@ -15,6 +15,8 @@ export interface SupportTier {
   /** captain tier is limited per school */
   limitedPerSchool?: number;
   popular?: boolean;
+  /** billed monthly (membership) vs. a one-time payment */
+  recurring?: boolean;
 }
 
 export const SUPPORT_TIERS: SupportTier[] = [
@@ -60,6 +62,7 @@ export const SUPPORT_TIERS: SupportTier[] = [
     ],
     icon: Shield,
     accent: "purple",
+    recurring: true,
   },
   {
     id: "captain",

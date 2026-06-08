@@ -107,6 +107,21 @@ export function computeHeatmap(athleteId: string): { state: string; supporters: 
   return [...map.values()].sort((a, b) => b.dollars - a.dollars);
 }
 
+/** Dollars raised for an athlete in the last N days (momentum stat). */
+export function computeRecentRaised(athleteId: string, days = 7): number {
+  const cutoff = Date.now() - days * 86400000;
+  return SUPPORTERS.filter(
+    (s) => s.athleteId === athleteId && s.status === "approved" && +new Date(s.createdAt) >= cutoff
+  ).reduce((acc, s) => acc + s.amount, 0);
+}
+
+/** Most recent approved supporters for social-proof strips. */
+export function recentSupporters(athleteId: string, limit = 8): Supporter[] {
+  return SUPPORTERS.filter((s) => s.athleteId === athleteId && s.status === "approved")
+    .sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt))
+    .slice(0, limit);
+}
+
 /** Daily revenue series for analytics charts. */
 export function computeRevenueSeries(athleteId: string, days = 30) {
   const supporters = SUPPORTERS.filter(

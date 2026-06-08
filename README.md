@@ -36,7 +36,7 @@ npm install
 npm run dev      # → http://localhost:3000
 ```
 
-That's it. The app boots in **demo mode** with rich, deterministic sample data — every page, chart, leaderboard, purchase flow, dashboard, and admin tool is fully interactive **without any external services**. A banner indicates demo mode.
+That's it. The app boots in **demo mode** with rich, deterministic sample data — every page, chart, leaderboard, purchase flow, dashboard, and admin tool is fully interactive **without any external services or network access** (athlete imagery is bundled as local SVG portraits). A banner indicates demo mode. The purchase flow simulates a successful Stripe checkout so it's fully demoable.
 
 To go live, copy `.env.example` → `.env.local` and add Supabase + Stripe keys. See **[docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)**.
 
@@ -87,6 +87,7 @@ npm run typecheck  # tsc --noEmit
 
 - **[Architecture](./docs/ARCHITECTURE.md)** — data model, user flows, leaderboard engine, design system
 - **[Deployment](./docs/DEPLOYMENT.md)** — Supabase, Stripe, Resend, Vercel, env vars
+- **[UX Recommendations](./docs/UX-RECOMMENDATIONS.md)** — research vs. Fanatics/Overtime/Rivals/On3/Cameo/Patreon/Kickstarter + backlog
 
 ---
 

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" fill="none">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8200"/>
+      <stop offset="100%" stop-color="#7a1a00"/>
+    </linearGradient>
+    <radialGradient id="r" cx="50%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g)"/>
+  <rect width="800" height="1000" fill="url(#r)"/>
+  <line x1="0" y1="120" x2="800" y2="120" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="230" x2="800" y2="230" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="340" x2="800" y2="340" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="450" x2="800" y2="450" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="560" x2="800" y2="560" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="670" x2="800" y2="670" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="780" x2="800" y2="780" stroke="white" stroke-opacity="0.05" stroke-width="2"/><line x1="0" y1="890" x2="800" y2="890" stroke="white" stroke-opacity="0.05" stroke-width="2"/>
+  <text x="400" y="620" font-family="Oswald, Arial, sans-serif" font-weight="700" font-size="520" fill="white" fill-opacity="0.10" text-anchor="middle" dominant-baseline="middle">55</text>
+  <!-- abstract player silhouette -->
+  <g fill="#070a12" fill-opacity="0.55">
+    <circle cx="400" cy="340" r="92"/>
+    <path d="M 220 1000 C 220 660, 290 500, 400 500 C 510 500, 580 660, 580 1000 Z"/>
+  </g>
+  <rect x="0" y="800" width="800" height="200" fill="#070a12" fill-opacity="0.55"/>
+  <text x="48" y="890" font-family="Oswald, Arial, sans-serif" font-weight="700" font-size="120" fill="white">TJ</text>
+  <rect x="50" y="910" width="176" height="56" rx="12" fill="#ffd34d"/>
+  <text x="70" y="950" font-family="Oswald, Arial, sans-serif" font-weight="700" font-size="40" fill="#070a12">EDGE</text>
+  </svg>
