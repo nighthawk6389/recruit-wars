@@ -81,7 +81,15 @@ npm run build      # production build
 npm run start      # serve production build
 npm run lint       # eslint
 npm run typecheck  # tsc --noEmit
+npm test           # vitest — unit tests for the leaderboard/stats engine
 ```
+
+### Tests
+
+The core leaderboard & analytics engine (`src/lib/data.ts`) is covered by a Vitest
+suite (`src/lib/data.test.ts`): standings ordering, engagement-score weighting,
+stats reconciliation, exclusion of non-approved content, heatmap/revenue/momentum
+helpers, and global aggregates. Run with `npm test`.
 
 ## 📄 Docs
 

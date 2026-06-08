@@ -90,3 +90,16 @@ Messages/videos default to `pending` (or `approved` post-payment for non-video).
 - **Support tiers / prices / perks / weights** → `config/tiers.ts`.
 
 Changing these propagates across nav, footer, metadata, purchase UI, emails, and share graphics.
+
+## Testing
+
+The leaderboard/stats engine is the most logic-heavy part of the app and is unit-tested with **Vitest** (`src/lib/data.test.ts`, run via `npm test`). Tests assert that:
+
+- standings and global rankings are sorted by dollars and reference real schools,
+- engagement scores equal the configured tier weights (`ENGAGEMENT_WEIGHTS`),
+- headline stats reconcile with the raw approved-supporter data,
+- pending/removed content is excluded everywhere,
+- heatmap/revenue-series/recent-raised/recent-supporters helpers behave (bucketing, ordering, bounds),
+- platform totals equal the sum of approved supporter amounts.
+
+Because all reads flow through `src/lib/data.ts`, these tests guard the contract the UI depends on regardless of whether data comes from the demo dataset or Supabase views.
